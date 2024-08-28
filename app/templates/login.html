@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Empty colomen -->
+
+
+        
+        </div>
+        <div class="col-md-4">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }} <br>
+                    {{ form.username(sive=32) }}<br>
+                    {% for error in form.username.errors %}
+                        <span style="color: rebeccapurple;">
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }} <br>
+                    {{ form.password(sive=32) }}<br>
+                    {% for error in form.password.errors %}
+                        <span style="color: rebeccapurple;">
+                            {{ error }}
+                        </span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <!-- Empty -->
+        </div>
+    </div>
+{% endblock %}

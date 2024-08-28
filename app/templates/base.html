@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+      }
+      .button1 {
+  background-color: white;
+  color: black;
+}
+
+.button1:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.button2 {
+  background-color: white;
+  color: black;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if title %}
+    <title> {{ title }} - Flask Templates</title>
+{% else %}
+    <title> Flask Templates Demo</title>
+{% endif %}
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container text-center">
+
+      <!-- Link -->
+
+      <div class="row text-center">
+          <div style="position: relative;">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/48ffd827-eb59-46fb-a1bd-60744d388d5a/df71cft-94769126-503e-4076-819c-a24053618146.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ4ZmZkODI3LWViNTktNDZmYi1hMWJkLTYwNzQ0ZDM4OGQ1YVwvZGY3MWNmdC05NDc2OTEyNi01MDNlLTQwNzYtODE5Yy1hMjQwNTM2MTgxNDYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ly2R7286RnKt4fZG4YHAfYHtbJJP4Ls4yNCE2ApL-Z4"
+            style="position: absolute; left: -100px; top: -19px;"
+            width="145" 
+           height="145" />
+          </div>
+
+          <div class="col-md-4">
+              <h1><a href="{{ url_for('index') }}">ShoreConnect</a></h1>
+          </div>
+          {% if current_user.is_authenticated %}
+              <div class="col-md-4">
+                  <h1><a href=" {{ url_for('profile', username=current_user.username) }} ">Profile</a></h1>
+              </div>
+              <div class="col-md-4">
+                  <h3><a href=" {{ url_for('logout') }}">Logout</a></h3>
+              </div>
+            {% else %}
+                <div class="col-md-4">
+                    <h1><a href=" {{ url_for('login') }} ">Login</a></h1>
+                </div>
+                <div class="col-md-4">
+                  <h1><a href="{{ url_for('register')}}">Register</a></h1>
+                </div>
+            {% endif %}
+        <hr>
+            <button class="button button1">Followers</button>
+            <button class="button button1">Follweing</button>
+            <button class="button button1">Likes</button>
+            <button class="button button2">Others</button>
+        </div>
+
+        <!-- Beginning of flask message -->
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                          <div>
+                              {{ message }}
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+            <!-- End of flash message -->
+          
+        </div>
+
+          {% block content %} {% endblock %}
+
+
+          
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous">
+    </script>
+  </body>
+</html>
